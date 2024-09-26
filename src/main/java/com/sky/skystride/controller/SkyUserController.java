@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:80")
+@CrossOrigin(origins = "http://35.176.106.162")
 public class SkyUserController {
 
     private SkyUserService service;
