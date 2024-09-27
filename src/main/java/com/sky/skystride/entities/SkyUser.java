@@ -1,16 +1,18 @@
 package com.sky.skystride.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -19,6 +21,11 @@ public class SkyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotNull
+    @Size(min = 5)
+    @Email
+    private String email;
 
     @Size(min = 2, max = 30)
     @NotNull
@@ -29,6 +36,9 @@ public class SkyUser {
     private String lastName;
 
     @NotNull
+    private int points;
+
+    @NotNull
     private boolean currentTimerRunning;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -36,9 +46,15 @@ public class SkyUser {
 
     private String startedSport;
 
-    public SkyUser(String firstName, String lastName) {
+    // Many-to-Many relationship with Team, mapped by "team_members"
+    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY) // SkyUser is already mapped by Team's "members"
+    private List<Team> teams = new ArrayList<>();
+
+    public SkyUser(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
+        this.email = email;
         this.currentTimerRunning = false;
+        this.points = 0;
     }
 }
