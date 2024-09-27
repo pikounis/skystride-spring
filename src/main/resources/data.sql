@@ -1,3 +1,3 @@
-insert into sky_user(first_name, last_name, email, current_timer_running, timer_start_time, started_sport, points)
-values ('Julie', 'Dooley', 'juliedooley@sky.uk', False, NULL, NULL, 0),
-('Bob', 'Smith', 'bobsmith@sky.uk', False, NULL, NULL, 0);
+insert into sky_user(first_name, last_name, email, current_timer_running, timer_start_time, started_sport, points, office)
+values ('Julie', 'Dooley', 'juliedooley@sky.uk', False, NULL, NULL, 0, 0),
+('Bob', 'Smith', 'bobsmith@sky.uk', False, NULL, NULL, 0, 1);
