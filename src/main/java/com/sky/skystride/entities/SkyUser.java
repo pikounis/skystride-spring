@@ -55,6 +55,7 @@ public class SkyUser {
     private List<Team> teams = new ArrayList<>();
 
     public SkyUser(String firstName, String lastName, String email, Office office) {
+        super();
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class Achievement {
+public class Sport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -20,15 +20,11 @@ public class Achievement {
     private String name;
 
     @NotNull
-    private String img;
+    private long ppm;
 
-    @NotNull
-    private int pointsNeeded;
-
-    public Achievement(String name, String img, int pointsNeeded) {
+    public Sport(String name, long ppm) {
         super();
         this.name = name;
-        this.img = img;
-        this.pointsNeeded = pointsNeeded;
+        this.ppm = ppm;
     }
 }
