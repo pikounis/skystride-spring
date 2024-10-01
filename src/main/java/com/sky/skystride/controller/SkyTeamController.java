@@ -58,6 +58,4 @@ public class SkyTeamController {
         Team updatedTeam = this.service.removeMember(teamId, skyUserId);
         return ResponseEntity.ok(updatedTeam);
     }
-
-
 }
