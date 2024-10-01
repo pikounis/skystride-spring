@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://35.176.106.162")
+@CrossOrigin(origins = {"http://35.176.106.162", "http://localhost:3000"})
 @RequestMapping("/activity")
 public class ActivityController {
     private ActivityService service;

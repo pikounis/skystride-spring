@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://35.176.106.162")
+@CrossOrigin(origins = {"http://35.176.106.162", "http://localhost:3000"})
 @RequestMapping("/team")
 public class SkyTeamController {
 
@@ -58,6 +58,4 @@ public class SkyTeamController {
         Team updatedTeam = this.service.removeMember(teamId, skyUserId);
         return ResponseEntity.ok(updatedTeam);
     }
-
-
 }

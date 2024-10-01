@@ -27,10 +27,6 @@ public class Activity {
     @JoinColumn(name = "sport_id")
     private Sport sport;
 
-//    @NotNull
-//    private int timeDoneSeconds;
-//
-
     @NotNull
     private LocalDateTime startTime;
 
