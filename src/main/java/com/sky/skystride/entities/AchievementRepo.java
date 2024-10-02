@@ -15,10 +15,20 @@ public interface AchievementRepo extends JpaRepository<Achievement, Integer> {
             "ORDER BY a.pointsNeeded ASC")
     List<Achievement> getClosestUserAchievement(int skyUserId, Pageable pageable);
 
+//    @Query("SELECT a FROM Achievement a WHERE a.pointsNeeded <= " +
+//            "(SELECT SUM(act.pointsEarned) FROM Activity act WHERE act.skyUser.id = :skyUserId AND act.sport.id = :sportId) " +
+//            "AND a.sport.id = :sportId")
+//    List<Achievement> findAchievementsByUserAndSport(@Param("skyUserId") int skyUserId, @Param("sportId") int sportId);
+
+//    Efficient method
     @Query("SELECT a FROM Achievement a WHERE a.pointsNeeded <= " +
-            "(SELECT SUM(act.pointsEarned) FROM Activity act WHERE act.skyUser.id = :skyUserId AND act.sport.id = :sportId) " +
-            "AND a.sport.id = :sportId")
-    List<Achievement> findAchievementsByUserAndSport(@Param("skyUserId") int skyUserId, @Param("sportId") int sportId);
+            "(SELECT SUM(act.pointsEarned) FROM Activity act WHERE act.skyUser.id = :skyUserId AND act.sport.id = a.sport.id)")
+    List<Achievement> findAllUserAchievements(@Param("skyUserId") int skyUserId);
+
+//    Backup method
+//    @Query("SELECT a FROM Achievement a WHERE a.sport.id = :sportId " +
+//            "AND a.pointsNeeded <= (SELECT SUM(act.pointsEarned) FROM Activity act WHERE act.skyUser.id = :skyUserId AND act.sport.id = :sportId)")
+//    List<Achievement> findUserAchievementsBySport(@Param("skyUserId") int skyUserId, @Param("sportId") int sportId);
 
     @Query("SELECT a, " +
             "(a.pointsNeeded - COALESCE((SELECT SUM(act.pointsEarned) FROM Activity act WHERE act.skyUser.id = :skyUserId AND act.sport.id = a.sport.id), 0)) AS pointsDiff " +

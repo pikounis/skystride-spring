@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = {"http://35.176.106.162", "http://localhost:3000"})
@@ -50,7 +51,7 @@ public class AchievementController {
     }
 
     @GetMapping("/getTopThree/{skyUserId}")
-    public List<Achievement> getTopThreeRecent(@PathVariable int skyUserId) {
-        return this.service.findTop3ClosestAchievements(skyUserId);
+    public List<Map<String, Object>> getTop3ClosestAchievements(@PathVariable int skyUserId) {
+        return this.service.findTop3ClosestAchievementsWithPointsDiff(skyUserId);
     }
 }
