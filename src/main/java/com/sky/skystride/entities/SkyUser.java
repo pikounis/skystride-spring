@@ -1,6 +1,7 @@
 package com.sky.skystride.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sky.skystride.utils.Office;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -51,7 +52,14 @@ public class SkyUser {
     private Office office;
 
     // Many-to-Many relationship with Team, mapped by "team_members"
-    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY) // SkyUser is already mapped by Team's "members"
+//    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY) // SkyUser is already mapped by Team's "members"
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JoinTable(
+            name = "team_members", // Name of the join table
+            joinColumns = @JoinColumn(name = "skyuser_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
     private List<Team> teams = new ArrayList<>();
 
     public SkyUser(String firstName, String lastName, String email, Office office) {

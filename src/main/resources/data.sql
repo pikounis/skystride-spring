@@ -28,20 +28,21 @@ INSERT INTO sport (name, ppm) VALUES
     ('Soccer', 11.1),
     ('Weightlifting', 15.2),
     ('Golf', 4.5),
-    ('Boxing', 13.75);
+    ('Boxing', 13.75),
+    ('Walking', 4.9);
 
 -- insert some teams - this is what we need to add for a team
 INSERT INTO team (name, imageURL, description, date_created, created_by_id) VALUES
-    ('The Champions', 'http://example.com/images/champions.png', 'A team of champions competing for the top spot.', '2015-09-09T20:22:15', 1),
-    ('The Mavericks', 'http://example.com/images/mavericks.png', 'Innovative thinkers breaking the mold.', '2016-01-15T14:22:30', 2),
-    ('The Warriors', 'http://example.com/images/warriors.png', 'Fierce competitors with a strong bond.', '2017-03-12T18:45:00', 3),
-    ('The Dream Team', 'http://example.com/images/dreamteam.png', 'A legendary group with dreams of victory.', '2018-07-22T10:10:10', 1),
-    ('The Explorers', 'http://example.com/images/explorers.png', 'Adventurers seeking new challenges.', '2019-11-05T09:30:45', 2),
-    ('The Guardians', 'http://example.com/images/guardians.png', 'Protectors of the realm, united as one.', '2020-02-20T16:50:00', 5),
-    ('The Innovators', 'http://example.com/images/innovators.png', 'Pioneers of new ideas and strategies.', '2021-05-10T11:20:30', 4),
-    ('The Gladiators', 'http://example.com/images/gladiators.png', 'Brave warriors ready for battle.', '2022-08-18T17:55:15', 1),
-    ('The Titans', 'http://example.com/images/titans.png', 'Colossal players dominating the field.', '2023-01-01T12:00:00', 2),
-    ('The Legends', 'http://example.com/images/legends.png', 'Creating a legacy that will be remembered.', '2023-03-15T15:30:00', 7);
+    ('The Champions', '/images/team.jpg', 'A team of champions competing for the top spot.', '2015-09-09 20:22:15', 1),
+    ('The Mavericks', '/images/demonlogo.jpeg', 'Innovative thinkers breaking the mold.', '2016-01-15 14:22:30', 2),
+    ('The Warriors', '/images/kitsunelogo.jpg', 'Fierce competitors with a strong bond.', '2017-03-12 18:45:00', 3),
+    ('The Dream Team', '/images/lionlogo.jpeg', 'A legendary group with dreams of victory.', '2018-07-22 10:10:10', 1),
+    ('The Explorers', '/images/logo192.png', 'Adventurers seeking new challenges.', '2019-11-05 09:30:45', 2),
+    ('The Guardians', '/images/logo512.png', 'Protectors of the realm, united as one.', '2020-02-20 16:50:00', 5),
+    ('The Innovators', '/images/sky.png', 'Pioneers of new ideas and strategies.', '2021-05-10 11:20:30', 4),
+    ('The Gladiators', '/images/skyStrideBlueLogo.png', 'Brave warriors ready for battle.', '2022-08-18 17:55:15', 1),
+    ('The Titans', '/images/skyStridePurpleLogo.png', 'Colossal players dominating the field.', '2023-01-01 12:00:00', 2),
+    ('The Legends', '/images/team.jpg', 'Creating a legacy that will be remembered.', '2023-03-15 15:30:00', 7);
 
 -- assign users into teams - do not add the creator to the team
 INSERT INTO team_members (team_id, skyuser_id) VALUES
@@ -125,16 +126,27 @@ INSERT INTO activity (sky_user_id, sport_id, start_time, end_time, points_earned
     (10, 3, '2023-06-20T15:00:00', '2023-06-20T17:00:00', 70);
 
 -- insert many achievements
-INSERT INTO achievement (name, img, points_needed) VALUES
-    ('Novice', 'http://example.com/images/novice.png', 200),
-    ('Intermediate', 'http://example.com/images/intermediate.png', 300),
-    ('Advanced', 'http://example.com/images/advanced.png', 400),
-    ('Expert', 'http://example.com/images/expert.png', 500),
-    ('Master', 'http://example.com/images/master.png', 600),
-    ('Champion', 'http://example.com/images/champion.png', 700),
-    ('Proficient', 'http://example.com/images/proficient.png', 250),
-    ('Adept', 'http://example.com/images/adept.png', 350),
-    ('Skilled', 'http://example.com/images/skilled.png', 450),
-    ('Accomplished', 'http://example.com/images/accomplished.png', 550),
-    ('Elite', 'http://example.com/images/elite.png', 650);
+INSERT INTO achievement (name, img, points_needed, sport_id) VALUES
+    ('Boxing', '/images/boxing-badge.png', 200, 10),
+    ('Cycling', '/images/cycling-badge.png', 300, 2),
+    ('Football', '/images/football-badge.png', 400, 6),
+    ('Runner', '/images/novice-runner.png', 500, 1),
+    ('Rackets', '/images/racketssports-badge.png', 600, 5),
+    ('Running', '/images/running-badge.png', 700, 1),
+    ('Strength', '/images/strength-training-badge.png', 250, 8),
+    ('Swimming', '/images/swimming-badge.png', 350, 3),
+    ('Walking', '/images/walking-badge.png', 450, 11),
+    ('Yoga', '/images/yoga-badge.png', 550, 6);
 
+--INSERT INTO sport (name, ppm) VALUES
+--    ('Running', 10.5),
+--    ('Cycling', 8.75),
+--    ('Swimming', 7.25),
+--    ('Basketball', 12.3),
+--    ('Tennis', 9.5),
+--    ('Yoga', 5.0),
+--    ('Soccer', 11.1),
+--    ('Weightlifting', 15.2),
+--    ('Golf', 4.5),
+--    ('Boxing', 13.75);
+--    ('Walking', 4.9);
