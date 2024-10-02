@@ -48,7 +48,9 @@ public class Team {
 //            joinColumns = @JoinColumn(name = "team_id"), // Column representing Team in the join table
 //            inverseJoinColumns = @JoinColumn(name = "skyuser_id") // Column representing SkyUser in the join table
 //    )
-    @ManyToMany(mappedBy = "teams", fetch = FetchType.LAZY)
+//    @ManyToMany(mappedBy = "teams")
+//    private List<SkyUser> members = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teams")
     private List<SkyUser> members = new ArrayList<>();
 
     @CreatedBy
@@ -62,4 +64,8 @@ public class Team {
         this.imageURL = imageURL;
         this.description = description;
     }
+
+//    public List<Integer> getMembers() {
+//        return members.stream().map(SkyUser::getId).toList();
+//    }
 }
