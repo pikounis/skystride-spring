@@ -6,8 +6,7 @@ import com.sky.skystride.entities.Team;
 import com.sky.skystride.entities.TeamRepo;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class TeamService {
@@ -32,7 +31,8 @@ public class TeamService {
         // Create the team and set the creator
         Team team = new Team(name, imageURL, description);
         team.setCreatedBy(createdBy);
-        addMember(team.getId(), createdById);
+        List<SkyUser> members = Collections.singletonList(createdBy);
+        team.setMembers(members);
 
         // Save the new team
         return teamRepo.save(team);
