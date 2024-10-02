@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,5 +62,26 @@ public class ActivityService {
     public boolean deleteActivity(int activityId) {
         this.activityRepo.deleteById(activityId);
         return !this.activityRepo.existsById(activityId);
+    }
+
+    public List<Integer> getPointsHistoryForLast5Days(int skyUserId, LocalDateTime date) {
+        List<Integer> pointsHistory = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            LocalDateTime startDate = date.minusDays(i).withHour(0).withMinute(0).withSecond(0);
+            LocalDateTime endDate = startDate.withHour(23).withMinute(59).withSecond(59);
+            pointsHistory.add(this.activityRepo.getPointsEarnedBetweenDates(skyUserId, startDate, endDate));
+        }
+        return pointsHistory;
+    }
+
+    public List<Integer> getWorkoutHoursHistoryForLast5Days(int skyUserId, LocalDateTime date) {
+        List<Integer> hoursHistory = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            LocalDateTime startDate = date.minusDays(i).withHour(0).withMinute(0).withSecond(0);
+            LocalDateTime endDate = startDate.withHour(23).withMinute(59).withSecond(59);
+            Integer minutesWorkedOut = this.activityRepo.getMinutesWorkedOutBetweenDates(skyUserId, startDate, endDate);
+            hoursHistory.add(minutesWorkedOut != null ? minutesWorkedOut / 60 : 0);
+        }
+        return hoursHistory;
     }
 }

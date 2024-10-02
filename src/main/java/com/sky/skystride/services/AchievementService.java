@@ -7,10 +7,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class AchievementService {
@@ -57,5 +55,20 @@ public class AchievementService {
     public boolean deleteAchievement(int id){
         this.achievementRepo.deleteById(id);
         return !this.achievementRepo.existsById(id);
+    }
+
+    public List<Map<String, Object>> findTop3ClosestAchievementsWithPointsDiff(int skyUserId) {
+        Pageable top3 = PageRequest.of(0, 3);
+        List<Object[]> achievementWithDiffs = this.achievementRepo.findClosestAchievementsWithPointsDifference(skyUserId, top3);
+
+        // Create a list of achievements with the points difference
+        return achievementWithDiffs.stream()
+                .map(result -> {
+                    Map<String, Object> achievementData = new HashMap<>();
+                    achievementData.put("achievement", (Achievement) result[0]);
+                    achievementData.put("pointsDifference", (Integer) result[1]);
+                    return achievementData;
+                })
+                .collect(Collectors.toList());
     }
 }
