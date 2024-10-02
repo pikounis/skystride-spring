@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SkystrideApplication {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Throwable {
 		SpringApplication.run(SkystrideApplication.class, args);
 	}
 

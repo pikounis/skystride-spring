@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SkyUserRepo extends JpaRepository<SkyUser, Integer> {
+
+    SkyUser findByEmail(String email);
 }

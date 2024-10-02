@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
-public class SkyUser {
+public class SkyUser implements java.io.Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -27,6 +28,10 @@ public class SkyUser {
     @Size(min = 5)
     @Email
     private String email;
+
+    @NotNull
+    @Size(min = 8)
+    private String userPassword;
 
     @Size(min = 2, max = 30)
     @NotNull
@@ -54,7 +59,7 @@ public class SkyUser {
     @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY) // SkyUser is already mapped by Team's "members"
     private List<Team> teams = new ArrayList<>();
 
-    public SkyUser(String firstName, String lastName, String email, Office office) {
+    public SkyUser(String firstName, String lastName, String email, Office office, String userPassword) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
@@ -62,5 +67,6 @@ public class SkyUser {
         this.currentTimerRunning = false;
         this.points = 0;
         this.office = office;
+        this.userPassword = userPassword;
     }
 }
