@@ -31,11 +31,12 @@ public class TeamService {
         // Create the team and set the creator
         Team team = new Team(name, imageURL, description);
         team.setCreatedBy(createdBy);
-        List<SkyUser> members = Collections.singletonList(createdBy);
-        team.setMembers(members);
 
+        Team saved = teamRepo.save(team);
+
+        addMember(saved.getId(), createdById);
         // Save the new team
-        return teamRepo.save(team);
+        return saved;
     }
 
     public Boolean deleteTeam(int id) {
@@ -61,6 +62,27 @@ public class TeamService {
         return this.teamRepo.save(existing);
     }
 
+//    public Team addMember(int teamId, int skyUserId) {
+//        Optional<Team> existingTeam = this.teamRepo.findById(teamId);
+//        Team existing = existingTeam.orElseThrow(() -> new RuntimeException("Team not found"));
+//
+//        // Fetch the SkyUser using skyUserId
+//        Optional<SkyUser> skyUser = this.skyUserRepo.findById(skyUserId);
+//        SkyUser user = skyUser.orElseThrow(() -> new RuntimeException("SkyUser not found"));
+//
+//        // Add the SkyUser to the members list
+////        System.out.println(existing.getMembers()); -> THIS PRINT PRODUCES A STACKOVERFLOW ERROR: NULL
+//        List<SkyUser> members = existing.getMembers();
+//        if (!members.contains(user)) { // To avoid duplicates
+//            members.add(user);
+//        }
+//
+//        existing.setMembers(members);
+//        Team saved = this.teamRepo.save(existing);
+////        System.out.println(saved);
+//        return saved;
+//    }
+
     public Team addMember(int teamId, int skyUserId) {
         Optional<Team> existingTeam = this.teamRepo.findById(teamId);
         Team existing = existingTeam.orElseThrow(() -> new RuntimeException("Team not found"));
@@ -70,12 +92,24 @@ public class TeamService {
         SkyUser user = skyUser.orElseThrow(() -> new RuntimeException("SkyUser not found"));
 
         // Add the SkyUser to the members list
+//        existing.getMembers().forEach(member -> {
+//            System.out.println("Member ID: " + member.getId());
+//        });
         List<SkyUser> members = existing.getMembers();
-        if (!members.contains(user)) { // To avoid duplicates
+        if (!members.contains(user)) {
             members.add(user);
+            existing.setMembers(members); // Set the updated members list
+
+            // Also add the team to the user's teams list to sync both sides
+            List<Team> userTeams = user.getTeams();
+            if (!userTeams.contains(existing)) {
+                userTeams.add(existing);
+                user.setTeams(userTeams); // Set the updated teams list
+            }
         }
 
-        existing.setMembers(members);
+        // Save the SkyUser and Team to ensure persistence of both sides of the relationship
+        this.skyUserRepo.save(user);
         return this.teamRepo.save(existing);
     }
 
