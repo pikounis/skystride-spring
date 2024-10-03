@@ -126,12 +126,17 @@ public class TeamService {
         Optional<SkyUser> skyUser = this.skyUserRepo.findById(skyUserId);
         SkyUser user = skyUser.orElseThrow(() -> new RuntimeException("SkyUser not found"));
 
-        // Remove the SkyUser from the members list
         List<SkyUser> members = existing.getMembers();
         if (members.contains(user)) {
             members.remove(user);
-        } else {
-            throw new RuntimeException("SkyUser not found in team members");
+            existing.setMembers(members); // Set the updated members list
+
+            // Also add the team to the user's teams list to sync both sides
+            List<Team> userTeams = user.getTeams();
+            if (userTeams.contains(existing)) {
+                userTeams.remove(existing);
+                user.setTeams(userTeams); // Set the updated teams list
+            }
         }
 
         existing.setMembers(members);
