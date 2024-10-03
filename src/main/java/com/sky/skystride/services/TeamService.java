@@ -1,12 +1,10 @@
 package com.sky.skystride.services;
 
-import com.sky.skystride.entities.SkyUser;
-import com.sky.skystride.entities.SkyUserRepo;
-import com.sky.skystride.entities.Team;
-import com.sky.skystride.entities.TeamRepo;
+import com.sky.skystride.entities.*;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class TeamService {
@@ -49,7 +47,14 @@ public class TeamService {
     }
 
     public List<Team> getMyTeams(int skyUserId) {
-        return this.teamRepo.findTeamsByMemberId(skyUserId);
+        List<Team> teams = this.teamRepo.findTeamsByMemberId(skyUserId);
+
+        // Sort members by points in descending order for each team
+        teams.forEach(team -> {
+            team.getMembers().sort(Comparator.comparingInt(SkyUser::getPoints).reversed());
+        });
+
+        return teams;
     }
 
     public Team updateTeam(int id, Team team){
@@ -131,6 +136,34 @@ public class TeamService {
 
         existing.setMembers(members);
         return this.teamRepo.save(existing);
+    }
+
+    public List<TeamWithAveragePointsDTO> getAllTeamsWithAveragePoints() {
+        List<Team> teams = this.teamRepo.findAll();
+
+        // Map teams to DTOs with average points calculated and then sort by averagePoints in descending order
+        return teams.stream()
+                .map(team -> {
+                    List<SkyUser> members = team.getMembers();
+                    double averagePoints = 0;
+
+                    if (!members.isEmpty()) {
+                        averagePoints = members.stream()
+                                .mapToInt(SkyUser::getPoints)
+                                .average()
+                                .orElse(0);
+                    }
+
+                    return new TeamWithAveragePointsDTO(
+                            team.getId(),
+                            team.getName(),
+                            team.getDescription(),
+                            team.getImageURL(),
+                            averagePoints
+                    );
+                })
+                .sorted(Comparator.comparingDouble(TeamWithAveragePointsDTO::getAveragePoints).reversed()) // Sort by averagePoints in descending order
+                .collect(Collectors.toList());
     }
 
 

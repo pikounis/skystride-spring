@@ -2,6 +2,7 @@ package com.sky.skystride.controller;
 
 import com.sky.skystride.entities.SkyUser;
 import com.sky.skystride.entities.Team;
+import com.sky.skystride.entities.TeamWithAveragePointsDTO;
 import com.sky.skystride.services.TeamService;
 import jakarta.validation.Valid;
 import jakarta.websocket.server.PathParam;
@@ -25,6 +26,11 @@ public class SkyTeamController {
     @GetMapping("/getAll")
     public List<Team> getAll() {
         return this.service.getAllTeams();
+    }
+
+    @GetMapping("/getAllWithAveragePoints")
+    public List<TeamWithAveragePointsDTO> getAllTeamsWithAveragePoints() {
+        return this.service.getAllTeamsWithAveragePoints();
     }
 
     @GetMapping("/getMyTeams/{skyUserId}")
@@ -58,4 +64,6 @@ public class SkyTeamController {
         Team updatedTeam = this.service.removeMember(teamId, skyUserId);
         return ResponseEntity.ok(updatedTeam);
     }
+
+
 }

@@ -50,10 +50,20 @@ public class ActivityService {
         Optional<Activity> existingActivity = this.activityRepo.findById(activityId);
         Activity existing = existingActivity.get();
 
+        SkyUser user = existing.getSkyUser();
+
+//        Get rid of user's points so can be updated after
+        user.setPoints(user.getPoints() - existing.getPointsEarned());
+
         existing.setSport(sport);
         existing.setStartTime(startTime);
         existing.setEndTime(endTime);
         calculatePointsEarned(existing);
+
+//        Add newly calculated points for the activity to the user
+        user.setPoints(user.getPoints() + existing.getPointsEarned());
+        this.skyUserRepo.save(user);
+        this.activityRepo.save(existing);
         return existing; // create update
     }
 
