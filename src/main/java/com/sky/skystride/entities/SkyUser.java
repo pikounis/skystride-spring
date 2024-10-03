@@ -1,6 +1,8 @@
 package com.sky.skystride.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sky.skystride.utils.Office;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,16 +51,32 @@ public class SkyUser implements java.io.Serializable {
     @NotNull
     private boolean currentTimerRunning;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date timerStartTime;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime timerStartTime;
 
-    private String startedSport;
+    @Column(nullable = true)
+    private int startedSport; //leave this as the id int instead of a relationship
 
     @NotNull
     private Office office;
 
     // Many-to-Many relationship with Team, mapped by "team_members"
-    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY) // SkyUser is already mapped by Team's "members"
+//    @ManyToMany(mappedBy = "members", fetch = FetchType.LAZY) // SkyUser is already mapped by Team's "members"
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    @JoinTable(
+//            name = "team_members", // Name of the join table
+//            joinColumns = @JoinColumn(name = "skyuser_id"),
+//            inverseJoinColumns = @JoinColumn(name = "team_id")
+//    )
+//    private List<Team> teams = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @JsonIgnore
+    @JoinTable(
+            name = "team_members", // Name of the join table
+            joinColumns = @JoinColumn(name = "skyuser_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
     private List<Team> teams = new ArrayList<>();
 
     public SkyUser(String firstName, String lastName, String email, Office office, String userPassword) {

@@ -1,5 +1,7 @@
 package com.sky.skystride.controller;
 import com.sky.skystride.entities.SkyUser;
+import com.sky.skystride.entities.Sport;
+import com.sky.skystride.entities.TimerStatusDTO;
 import com.sky.skystride.services.SkyUserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
@@ -26,4 +28,20 @@ public class SkyUserController {
     public List<SkyUser> getAllSkyUsers() {
         return this.service.getAllSkyUsers();
     }
+
+    @PostMapping("/user/{skyUserId}/startTimer/{sportId}")
+    public SkyUser startTimer(@PathVariable int skyUserId, @PathVariable int sportId) {
+        return this.service.startTimer(skyUserId, sportId);
+    }
+
+    @PostMapping("/user/{skyUserId}/endTimer")
+    public SkyUser endTimer(@PathVariable int skyUserId) {
+        return this.service.endTimer(skyUserId);
+    }
+
+    @GetMapping("/user/{skyUserId}/getTimer")
+    public TimerStatusDTO getTimerStatus(@PathVariable int skyUserId) {
+        return this.service.getTimerStatus(skyUserId);
+    }
+
 }

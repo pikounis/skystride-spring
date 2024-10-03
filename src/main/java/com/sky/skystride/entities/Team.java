@@ -41,13 +41,16 @@ public class Team {
     private String description;
 
     // Many-to-Many relationship with SkyUser, mapped by the join table "team_members"
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnore
-    @JoinTable(
-            name = "team_members", // Name of the join table
-            joinColumns = @JoinColumn(name = "team_id"), // Column representing Team in the join table
-            inverseJoinColumns = @JoinColumn(name = "skyuser_id") // Column representing SkyUser in the join table
-    )
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JsonIgnore
+//    @JoinTable(
+//            name = "team_members", // Name of the join table
+//            joinColumns = @JoinColumn(name = "team_id"), // Column representing Team in the join table
+//            inverseJoinColumns = @JoinColumn(name = "skyuser_id") // Column representing SkyUser in the join table
+//    )
+//    @ManyToMany(mappedBy = "teams")
+//    private List<SkyUser> members = new ArrayList<>();
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teams")
     private List<SkyUser> members = new ArrayList<>();
 
     @CreatedBy
@@ -61,4 +64,8 @@ public class Team {
         this.imageURL = imageURL;
         this.description = description;
     }
+
+//    public List<Integer> getMembers() {
+//        return members.stream().map(SkyUser::getId).toList();
+//    }
 }
