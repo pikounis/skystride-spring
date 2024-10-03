@@ -5,8 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ActivityService {
@@ -51,15 +50,63 @@ public class ActivityService {
         Optional<Activity> existingActivity = this.activityRepo.findById(activityId);
         Activity existing = existingActivity.get();
 
+        SkyUser user = existing.getSkyUser();
+
+//        Get rid of user's points so can be updated after
+        user.setPoints(user.getPoints() - existing.getPointsEarned());
+
         existing.setSport(sport);
         existing.setStartTime(startTime);
         existing.setEndTime(endTime);
         calculatePointsEarned(existing);
+
+//        Add newly calculated points for the activity to the user
+        user.setPoints(user.getPoints() + existing.getPointsEarned());
+        this.skyUserRepo.save(user);
+        this.activityRepo.save(existing);
         return existing; // create update
     }
 
     public boolean deleteActivity(int activityId) {
         this.activityRepo.deleteById(activityId);
         return !this.activityRepo.existsById(activityId);
+    }
+
+    public List<Map<String, Object>> getPointsHistoryForLast5Days(int skyUserId, LocalDateTime date) {
+        List<Map<String, Object>> pointsHistory = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            LocalDateTime startDate = date.minusDays(i).withHour(0).withMinute(0).withSecond(0);
+            LocalDateTime endDate = startDate.withHour(23).withMinute(59).withSecond(59);
+            Integer pointsEarned = this.activityRepo.getPointsEarnedBetweenDates(skyUserId, startDate, endDate);
+
+            // Prepare a map with date and points
+            Map<String, Object> entry = new HashMap<>();
+            entry.put("date", startDate.toLocalDate());
+            entry.put("points", pointsEarned != null ? pointsEarned : 0);  // Handle null values
+
+            pointsHistory.add(entry);
+        }
+
+        return pointsHistory;
+    }
+
+    public List<Map<String, Object>> getWorkoutHoursHistoryForLast5Days(int skyUserId, LocalDateTime date) {
+        List<Map<String, Object>> workoutHistory = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            LocalDateTime startDate = date.minusDays(i).withHour(0).withMinute(0).withSecond(0);
+            LocalDateTime endDate = startDate.withHour(23).withMinute(59).withSecond(59);
+            Integer minutesWorkedOut = this.activityRepo.getMinutesWorkedOutBetweenDates(skyUserId, startDate, endDate);
+
+            // Prepare a map with date and hours worked out
+            Map<String, Object> entry = new HashMap<>();
+            entry.put("date", startDate.toLocalDate());
+            entry.put("hours", minutesWorkedOut != null ? minutesWorkedOut / 60 : 0);  // Convert minutes to hours
+
+            workoutHistory.add(entry);
+        }
+
+        return workoutHistory;
     }
 }

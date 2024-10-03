@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = {"http://35.176.106.162", "http://localhost:3000"})
@@ -23,6 +24,18 @@ public class ActivityController {
     @GetMapping("/getMyActivities/{skyUserId}")
     public List<Activity> getMyActivities(@PathVariable int skyUserId) {
         return this.service.getAllUserActivity(skyUserId);
+    }
+
+    @GetMapping("/getPointsHistoryForLast5Days/{skyUserId}")
+    public List<Map<String, Object>> getPointsHistoryForLast5Days(@PathVariable int skyUserId) {
+        LocalDateTime today = LocalDateTime.now();
+        return this.service.getPointsHistoryForLast5Days(skyUserId, today);
+    }
+
+    @GetMapping("/getWorkoutHoursHistoryForLast5Days/{skyUserId}")
+    public List<Map<String, Object>> getWorkoutHoursHistoryForLast5Days(@PathVariable int skyUserId) {
+        LocalDateTime today = LocalDateTime.now();
+        return this.service.getWorkoutHoursHistoryForLast5Days(skyUserId, today);
     }
 
     @PostMapping("/create")
