@@ -6,6 +6,7 @@ import com.sky.skystride.services.SkyUserService;
 import com.sky.skystride.security.JwtUtil;
 import com.sky.skystride.dto.LoginDTO;
 
+import com.sky.skystride.utils.AuthenticationResponse;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -44,8 +45,10 @@ public class AuthController {
         LoginDTO existingUser = this.authService.getProfileByEmail(credentials.getEmail());
         System.out.println("user: " + existingUser.getEmail());
         if (existingUser != null && this.authService.getPasswordEncoder().matches(credentials.getUserPassword(), existingUser.getUserPassword())){
-            String token = JwtUtil.generateToken(existingUser.getEmail());
-            return ResponseEntity.ok(token);
+            String token = JwtUtil.generateToken(existingUser.getEmail(), existingUser.getId());
+//            return ResponseEntity.ok(token, existingUser.getId());
+            return ResponseEntity.ok(new AuthenticationResponse(token, existingUser.getId()));
+
         }
         return ResponseEntity.status(401).body("Invalid Credentials");
     }

@@ -27,6 +27,7 @@ public class SkyUser implements java.io.Serializable {
     @NotNull
     @Size(min = 5)
     @Email
+    @Column(unique = true)
     private String email;
 
     @NotNull
