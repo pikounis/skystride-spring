@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,10 +45,11 @@ public class SkyUser {
     @NotNull
     private boolean currentTimerRunning;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date timerStartTime;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime timerStartTime;
 
-    private String startedSport;
+    @Column(nullable = true)
+    private int startedSport; //leave this as the id int instead of a relationship
 
     @NotNull
     private Office office;

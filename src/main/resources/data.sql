@@ -1,20 +1,41 @@
 -- some user inserts, they have also some activities running
-INSERT INTO sky_user (first_name, last_name, email, current_timer_running, timer_start_time, started_sport, points, office) VALUES
-    ('Alice', 'Johnson', 'alice.johnson@sky.uk', FALSE, NULL, NULL, 15, 0),
-    ('Mark', 'Wilson', 'mark.wilson@sky.uk', TRUE, '2024-10-01T09:30:00', 'Running', 25, 1),
-    ('Sara', 'Davis', 'sara.davis@sky.uk', FALSE, NULL, NULL, 30, 2),
-    ('Michael', 'Brown', 'michael.brown@sky.uk', TRUE, '2024-10-01T10:00:00', 'Cycling', 10, 3),
-    ('Emily', 'Taylor', 'emily.taylor@sky.uk', FALSE, NULL, NULL, 5, 0),
-    ('David', 'Anderson', 'david.anderson@sky.uk', TRUE, '2024-10-01T11:15:00', 'Swimming', 20, 1),
-    ('Laura', 'Thomas', 'laura.thomas@sky.uk', FALSE, NULL, NULL, 12, 2),
-    ('James', 'Jackson', 'james.jackson@sky.uk', TRUE, '2024-10-01T12:30:00', 'Basketball', 18, 3),
-    ('Sophia', 'White', 'sophia.white@sky.uk', FALSE, NULL, NULL, 22, 0),
-    ('Daniel', 'Harris', 'daniel.harris@sky.uk', FALSE, NULL, NULL, 28, 1),
-    ('Olivia', 'Martin', 'olivia.martin@sky.uk', TRUE, '2024-10-01T13:45:00', 'Tennis', 14, 2),
-    ('Benjamin', 'Lee', 'benjamin.lee@sky.uk', FALSE, NULL, NULL, 9, 3),
-    ('Mia', 'Walker', 'mia.walker@sky.uk', TRUE, '2024-10-01T14:50:00', 'Yoga', 11, 0),
-    ('Liam', 'Hall', 'liam.hall@sky.uk', FALSE, NULL, NULL, 17, 1),
-    ('Ava', 'Allen', 'ava.allen@sky.uk', TRUE, '2024-10-01T15:30:00', 'Soccer', 13, 2);
+INSERT INTO sky_user (first_name, last_name, email, current_timer_running, timer_start_time, started_sport, points, office)
+VALUES
+    ('Alice', 'Johnson', 'alice.johnson@sky.uk', FALSE, NULL, 0, 15, 0),
+    ('Mark', 'Wilson', 'mark.wilson@sky.uk', FALSE, NULL, 0, 25, 1),
+    ('Sara', 'Davis', 'sara.davis@sky.uk', FALSE, NULL, 0, 30, 2),
+    ('Michael', 'Brown', 'michael.brown@sky.uk', FALSE, NULL, 0, 10, 3),
+    ('Emily', 'Taylor', 'emily.taylor@sky.uk', FALSE, NULL, 0, 5, 0),
+    ('David', 'Anderson', 'david.anderson@sky.uk', FALSE, NULL, 0, 20, 1),
+    ('Laura', 'Thomas', 'laura.thomas@sky.uk', FALSE, NULL, 0, 12, 2),
+    ('James', 'Jackson', 'james.jackson@sky.uk', FALSE, NULL, 0, 18, 3),
+    ('Sophia', 'White', 'sophia.white@sky.uk', FALSE, NULL, 0, 22, 0),
+    ('Daniel', 'Harris', 'daniel.harris@sky.uk', FALSE, NULL, 0, 28, 1),
+    ('Olivia', 'Martin', 'olivia.martin@sky.uk', FALSE, NULL, 0, 14, 2),
+    ('Benjamin', 'Lee', 'benjamin.lee@sky.uk', FALSE, NULL, 0, 9, 3),
+    ('Mia', 'Walker', 'mia.walker@sky.uk', FALSE, NULL, 0, 11, 0),
+    ('Liam', 'Hall', 'liam.hall@sky.uk', FALSE, NULL, 0, 17, 1),
+    ('Ava', 'Allen', 'ava.allen@sky.uk', FALSE, NULL, 0, 13, 2);
+
+
+--INSERT INTO sky_user (first_name, last_name, email, current_timer_running, timer_start_time, started_sport, points, office, user_password) VALUES
+--    ('Alice', 'Johnson', 'alice.johnson@sky.uk', FALSE, NULL, NULL, 15, 0, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Mark', 'Wilson', 'mark.wilson@sky.uk', TRUE, '2024-10-01 09:30:00', 'Running', 25, 1, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Sara', 'Davis', 'sara.davis@sky.uk', FALSE, NULL, NULL, 30, 2, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Michael', 'Brown', 'michael.brown@sky.uk', TRUE, '2024-10-01 10:00:00', 'Cycling', 10, 3, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Emily', 'Taylor', 'emily.taylor@sky.uk', FALSE, NULL, NULL, 5, 0, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('David', 'Anderson', 'david.anderson@sky.uk', TRUE, '2024-10-01 11:15:00', 'Swimming', 20, 1, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Laura', 'Thomas', 'laura.thomas@sky.uk', FALSE, NULL, NULL, 12, 2, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('James', 'Jackson', 'james.jackson@sky.uk', TRUE, '2024-10-01 12:30:00', 'Basketball', 18, 3, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Sophia', 'White', 'sophia.white@sky.uk', FALSE, NULL, NULL, 22, 0, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Daniel', 'Harris', 'daniel.harris@sky.uk', FALSE, NULL, NULL, 28, 1, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Olivia', 'Martin', 'olivia.martin@sky.uk', TRUE, '2024-10-01 13:45:00', 'Tennis', 14, 2, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Benjamin', 'Lee', 'benjamin.lee@sky.uk', FALSE, NULL, NULL, 9, 3, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Mia', 'Walker', 'mia.walker@sky.uk', TRUE, '2024-10-01 14:50:00', 'Yoga', 11, 0, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Liam', 'Hall', 'liam.hall@sky.uk', FALSE, NULL, NULL, 17, 1, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW'),
+--    ('Ava', 'Allen', 'ava.allen@sky.uk', TRUE, '2024-10-01 15:30:00', 'Soccer', 13, 2, '$2a$12$PMaXXn0TUEgR0/RvuVjD3uKAq8tYT0B0RGsdyBJzFSTwkNps5VTqW');
+
+
 
 
 -- the list of sports - the ppm specifies the actual calories/m
