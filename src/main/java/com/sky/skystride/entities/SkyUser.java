@@ -53,7 +53,9 @@ public class SkyUser implements java.io.Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date timerStartTime;
 
-    private String startedSport;
+    @Column(nullable = true)
+    private int startedSport;
+
 
     @NotNull
     private Office office;
@@ -86,5 +88,6 @@ public class SkyUser implements java.io.Serializable {
         this.points = 0;
         this.office = office;
         this.userPassword = userPassword;
+        this.startedSport = 0;
     }
 }

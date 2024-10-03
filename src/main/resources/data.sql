@@ -27,7 +27,8 @@ INSERT INTO sport (name, ppm) VALUES
     ('Soccer', 11.1),
     ('Weightlifting', 15.2),
     ('Golf', 4.5),
-    ('Boxing', 13.75);
+    ('Boxing', 13.75),
+    ('Walking', 4.9);
 
 -- insert some teams - this is what we need to add for a team
 INSERT INTO team (name, imageURL, description, date_created, created_by_id) VALUES
@@ -124,15 +125,17 @@ INSERT INTO activity (sky_user_id, sport_id, start_time, end_time, points_earned
     (10, 3, '2023-06-20 15:00:00', '2023-06-20 17:00:00', 70);
 
 -- insert many achievements
-INSERT INTO achievement (name, img, points_needed) VALUES
-    ('Boxing', '/images/boxing-badge.png', 200),
-    ('Cycling', '/images/cycling-badge.png', 300),
-    ('Football', '/images/football-badge.png', 400),
-    ('Runner', '/images/novice-runner.png', 500),
-    ('Rackets', '/images/racketssports-badge.png', 600),
-    ('Running', '/images/running-badge.png', 700),
-    ('Strength', '/images/strength-training-badge.png', 250),
-    ('Swimming', '/images/swimming-badge.png', 350),
-    ('Walking', '/images/walking-badge.png', 450),
-    ('Yoga', '/images/yoga-badge.png', 550);
+--INSERT INTO achievement (name, img, points_needed) VALUES
+--    ('Boxing', '/images/boxing-badge.png', 200),
+--    ('Cycling', '/images/cycling-badge.png', 300),
+--    ('Football', '/images/football-badge.png', 400),
+--    ('Runner', '/images/novice-runner.png', 500),
+--    ('Rackets', '/images/racketssports-badge.png', 600),
+--    ('Running', '/images/running-badge.png', 700),
+--    ('Strength', '/images/strength-training-badge.png', 250),
+--    ('Swimming', '/images/swimming-badge.png', 350),
+--    ('Walking', '/images/walking-badge.png', 450),
+--    ('Yoga', '/images/yoga-badge.png', 550);
+--
 
+INSERT INTO achievement (name, img, points_needed, sport_id) VALUES    ('Boxing', '/images/boxing-badge.png', 200, 10),    ('Cycling', '/images/cycling-badge.png', 300, 2),    ('Football', '/images/football-badge.png', 400, 6),    ('Runner', '/images/novice-runner.png', 500, 1),    ('Rackets', '/images/racketssports-badge.png', 600, 5),    ('Running', '/images/running-badge.png', 700, 1),    ('Strength', '/images/strength-training-badge.png', 250, 8),    ('Swimming', '/images/swimming-badge.png', 350, 3),    ('Walking', '/images/walking-badge.png', 450, 11),    ('Yoga', '/images/yoga-badge.png', 550, 6);
