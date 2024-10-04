@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @NoArgsConstructor
-@CrossOrigin(origins = {"http://35.176.106.162", "http://localhost:3000"})
+@CrossOrigin(origins = {"http://35.176.106.162:3000", "http://localhost:3000"})
 public class AuthController {
 
     @Autowired

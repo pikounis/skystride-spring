@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@CrossOrigin(origins = {"http://35.176.106.162", "http://localhost:3000"})
+@CrossOrigin(origins = {"http://35.176.106.162:3000", "http://localhost:3000"})
 @RequestMapping("/achievement")
 public class AchievementController {
     private AchievementService service;
