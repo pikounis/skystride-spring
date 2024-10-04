@@ -50,7 +50,7 @@ public class Team {
 //    )
 //    @ManyToMany(mappedBy = "teams")
 //    private List<SkyUser> members = new ArrayList<>();
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "teams")
+    @ManyToMany(mappedBy = "teams")
     private List<SkyUser> members = new ArrayList<>();
 
     @CreatedBy

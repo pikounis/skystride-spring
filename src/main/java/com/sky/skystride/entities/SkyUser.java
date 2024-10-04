@@ -70,7 +70,7 @@ public class SkyUser implements java.io.Serializable {
 //            inverseJoinColumns = @JoinColumn(name = "team_id")
 //    )
 //    private List<Team> teams = new ArrayList<>();
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JsonIgnore
     @JoinTable(
             name = "team_members", // Name of the join table

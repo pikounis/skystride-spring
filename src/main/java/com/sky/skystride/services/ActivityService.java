@@ -102,7 +102,7 @@ public class ActivityService {
             // Prepare a map with date and hours worked out
             Map<String, Object> entry = new HashMap<>();
             entry.put("date", startDate.toLocalDate());
-            entry.put("hours", minutesWorkedOut != null ? minutesWorkedOut / 60 : 0);  // Convert minutes to hours
+            entry.put("minutes", minutesWorkedOut != null ? minutesWorkedOut : 0);
 
             workoutHistory.add(entry);
         }
