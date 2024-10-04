@@ -23,7 +23,7 @@ public class Activity {
     private SkyUser skyUser;
 
     @NotNull
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "sport_id")
     private Sport sport;
 

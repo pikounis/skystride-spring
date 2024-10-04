@@ -1,11 +1,9 @@
 package com.sky.skystride.controller;
 
-import com.sky.skystride.entities.SkyUser;
 import com.sky.skystride.entities.Team;
-import com.sky.skystride.entities.TeamWithAveragePointsDTO;
+import com.sky.skystride.dto.TeamWithAveragePointsDTO;
 import com.sky.skystride.services.TeamService;
 import jakarta.validation.Valid;
-import jakarta.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

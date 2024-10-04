@@ -1,5 +1,6 @@
 package com.sky.skystride.services;
 
+import com.sky.skystride.dto.TeamWithAveragePointsDTO;
 import com.sky.skystride.entities.*;
 import org.springframework.stereotype.Service;
 

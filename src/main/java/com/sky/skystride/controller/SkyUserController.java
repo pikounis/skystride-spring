@@ -1,7 +1,6 @@
 package com.sky.skystride.controller;
 import com.sky.skystride.entities.SkyUser;
-import com.sky.skystride.entities.Sport;
-import com.sky.skystride.entities.TimerStatusDTO;
+import com.sky.skystride.dto.TimerStatusDTO;
 import com.sky.skystride.services.SkyUserService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;

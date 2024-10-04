@@ -1,9 +1,11 @@
-package com.sky.skystride.entities;
+package com.sky.skystride.dto;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class TeamWithAveragePointsDTO {
+public class TeamWithAveragePointsDTO implements Serializable {
     private int id;
     private String name;
     private String description;

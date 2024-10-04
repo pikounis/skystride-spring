@@ -1,6 +1,7 @@
 package com.sky.skystride.services;
 
 import com.sky.skystride.dto.ProfileDTO;
+import com.sky.skystride.dto.TimerStatusDTO;
 import com.sky.skystride.entities.*;
 import lombok.Data;
 import org.modelmapper.ModelMapper;
