@@ -51,7 +51,7 @@ public class SkyUser implements java.io.Serializable {
     @NotNull
     private boolean currentTimerRunning;
 
-//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime timerStartTime;
 
     @Column(nullable = true)

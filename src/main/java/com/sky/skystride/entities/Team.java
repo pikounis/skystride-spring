@@ -32,6 +32,7 @@ public class Team {
     private String name;
 
     @CreatedDate
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dateCreated;
 
     private String imageURL;
